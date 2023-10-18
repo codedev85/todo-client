@@ -26,6 +26,8 @@ const Todos = () => {
 
    const navigate = useNavigate();
 
+   const baseUrl = process.env.REACT_APP_BASE_URL;
+
 
 
 
@@ -54,7 +56,7 @@ const Todos = () => {
       };
 
    
-      axios.post(`https://todo_project.test/api/v1/todos/create`,{
+      axios.post(`${baseUrl}/todos/create`,{
         'title':title,
         'to':toDate,
         'from':fromDate
@@ -101,12 +103,18 @@ const Todos = () => {
       };
 
    
-      axios.delete(`https://todo_project.test/api/v1/todos/delete/${id}`,config)
+      axios.delete(`${baseUrl}/todos/delete/${id}`,config)
        .then((response) => {
 
        if(response.data.success){
            setMessage(response.data.message)
           //  todos.unshift(response.data.data);
+
+           const updatedTodo = todos.filter((todo) => todo.id !== id);
+
+           setTodos(updatedTodo)
+
+
            setIsErrorMessage(false)
            setIsSuccessMessage(true)
            
@@ -142,7 +150,7 @@ const Todos = () => {
       };
 
    
-      axios.get(`https://todo_project.test/api/v1/todos/mark-as-complete/${id}`,config)
+      axios.get(`${baseUrl}/todos/mark-as-complete/${id}`,config)
        .then((response) => {
 
        if(response.data.success){
@@ -213,7 +221,7 @@ const Todos = () => {
         },
       };
   
-      axios.get(`https://todo_project.test/api/v1/todos/my-todos?filter=${todoFilter}`,config)
+      axios.get(`${baseUrl}/todos/my-todos?filter=${todoFilter}`,config)
         .then((response) => {
 
      
