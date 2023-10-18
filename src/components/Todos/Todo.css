@@ -1,0 +1,29 @@
+
+.todo{
+   background-color:rgb(12, 126, 126);
+   color: #fff;
+   padding:20px;
+   margin:2%;
+   /* margin: 20px; */
+ }
+
+ .todos-container{
+   display: flex;
+   flex-wrap: wrap;
+   max-width: 100%;
+}
+.top-container{
+   display: flex;
+   justify-content: space-between;
+}
+
+.top-container .filterOptions{
+   margin-right:20%;
+   margin-top:2%;
+}
+
+.top-container .filterOptions select{
+   padding:3%;
+}
+ 
+ 

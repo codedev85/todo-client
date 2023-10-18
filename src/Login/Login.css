@@ -1,0 +1,64 @@
+/* App.css or your custom CSS file */
+
+/* Container styles */
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   background-color: #f4f4f4;
+ }
+ 
+ /* Login form styles */
+ .login-form {
+   background: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   width: 300px;
+ }
+ 
+ /* Form header styles (e.g., "Login" title) */
+ .form-header {
+   text-align: center;
+   font-size: 24px;
+   margin-bottom: 20px;
+ }
+ 
+ /* Input styles */
+ .input-group {
+   margin-bottom: 15px;
+ }
+ 
+ .input-group label {
+   display: block;
+   font-weight: 600;
+   margin-bottom: 5px;
+ }
+ 
+ .input-group input {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+ }
+ 
+ /* Submit button styles */
+ .btn {
+   background-color: #007bff;
+   color: #fff;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ /* Error message styles */
+ .error-message {
+   color: #ff0000;
+   font-size: 14px;
+   margin-top: 5px;
+ }
+ 
+ /* Additional styles as needed */
+ 
