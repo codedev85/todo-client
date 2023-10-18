@@ -4,6 +4,7 @@
    color: #fff;
    padding:20px;
    margin:2%;
+   width: 20%;
    /* margin: 20px; */
  }
 
@@ -18,12 +19,63 @@
 }
 
 .top-container .filterOptions{
-   margin-right:20%;
+   /* margin-right:20%; */
    margin-top:2%;
 }
 
 .top-container .filterOptions select{
    padding:3%;
 }
+.addTodo ,.clearTodo{
+   padding:10px;
+}
+
+.addTodo{
+   color:#fff;
+   background-color: rgb(4, 131, 40);
+   border: none;
+}
+
+.clearTodo{
+   color:#fff;
+   background-color: rgb(225, 5, 5);
+   border: none;
+   margin-left:3px;
+}
+.success{
+   padding:10px;
+   color:#fff;
+   background-color: rgb(4, 131, 40);
+
+}
+
+.error{
+   padding:10px;
+   color:#fff;
+   background-color: rgb(225, 5, 5);
+
+}
+
+.delete_todos{
+   padding:10px;
+   color:#fff;
+   background-color: rgb(193, 75, 75);
+   border:none;
+
+}
+.complete_todos{
+   padding:10px;
+   color:#fff;
+   background-color: rgb(4, 131, 40);
+   border:none;
+   margin-left:2px;
+}
+.logout{
+   padding:10px;
+   color:#fff;
+   background-color: rgb(193, 75, 75);
+   border:none;
+}
+ 
  
  
