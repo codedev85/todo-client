@@ -23,16 +23,53 @@ const Todos = () => {
    const [error ,setError] = useState('');
    const [isSuccessMessage ,setIsSuccessMessage] = useState(false);
    const [isErrorMessage ,setIsErrorMessage] = useState(false);
+   const [draggedDiv, setDraggedDiv] = useState(null);
+   const [isDragging, setIsDragging] = useState(false);
 
    const navigate = useNavigate();
 
    const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
+   const handleDragStart = (e, id) => {
+      e.dataTransfer.setData('text/plain', id);
+      setDraggedDiv(id);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+ 
+   const handleDragEnd = () => {
+     setIsDragging(false);
+   };
+ 
+   const handleDrop = (e ,id) => {
+    
+     e.preventDefault();
+
+     if (draggedDiv === id) return;
+ 
+     const draggedTodo = todos.findIndex((todo) => todo.id === draggedDiv);
+
+     const dropTodo = todos.findIndex((todo) => todo.id === id);
+ 
+   
+     const updatedTodos = [...todos];
+
+     updatedTodos.splice(dropTodo, 0, updatedTodos.splice(draggedTodo, 1)[0]);
+ 
+     setTodos(updatedTodos);
+     console.log(todos)
+   };
+ 
+  //  const handleDragOver = (e) => {
+  //    e.preventDefault();
+  //  };
 
 
    const openModal = () => {
-    setModalOpen(true);
+      setModalOpen(true);
     };
 
   const closeModal = () => {
@@ -279,11 +316,23 @@ const Todos = () => {
         }
         
         <br/>
-        <div className="todos-container">
+        <div 
+         className="todos-container"
+         onDragOver={handleDragOver}
+         onDrop={handleDrop}
+         >
             {
               todos.length > 0 ? (
                todos.map((todo) => (
-                  <div  className="todo"  key={todo.id}>
+                  <div  className="todo"  key={todo.id}
+                   id="draggable-div"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, todo.id)}
+                    onDrop={(e) => handleDrop(e, todo.id)}
+                    onDragOver={handleDragOver}
+                    style={{ border: isDragging ? '2px dashed #000' : '2px solid #000' }}
+                  
+                  >
                   Title: {todo.title} <br/> <br/>
                   <span>Date :{todo.from} - {todo.to}</span> <br/> <br/>
                   Status :{todo.status}<br/><br/>
