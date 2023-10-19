@@ -1,56 +1,66 @@
-import React, { useState , useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Login from './Login/Login';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes , Outlet, useNavigate} from 'react-router-dom';
 import Todos from './components/Todos/Todos';
-import ProtectedRoute from './middleware/ProtectedRoute';
+//import ProtectedRoute from './middleware/ProtectedRoute';
 
-function setToken(userToken) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
+// function setToken(userToken) {
+//   sessionStorage.setItem('token', JSON.stringify(userToken));
+// }
+
+// function getToken() {
+//   const tokenString = sessionStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken?.token
+// }
+
+function ProtectedRoute() {
+
+  const navigate = useNavigate();
+  const isAuth = sessionStorage.getItem('token');
+  
+
+  useEffect(() => {
+
+    if(!isAuth){
+
+      navigate('/'); 
+
+    }
+ }, [isAuth,navigate]);
+
+  if (isAuth) {
+    console.log('autheticated')
+    return <Outlet />;
+  } else {
+    console.log('not autheticated')
+    return null;
+    
+  }
 }
-
-function getToken() {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token
-}
-
 function App(){
 
-  const isAuth = sessionStorage.getItem('token');
-  const [userIsAuthenticated , setUserIsAuthenticated] = useState(false)
-
-  // const [token, setToken] = useState(null);
-
-  // setToken(isAuth)
- 
-
- 
-  // console.log(userIsAuthenticated )
-
-  const Token = getToken();
-
-  // if(!token) {
-  //      return <Login setToken={setToken} /> 
-  // }
-  useEffect(() => {
+  // const isAuth = sessionStorage.getItem('token');
+  // const [userIsAuthenticated , setUserIsAuthenticated] = useState(false)
   
-     isAuth !== null ? setUserIsAuthenticated(true) : setUserIsAuthenticated(false)
+  
+ 
+  // useEffect(() => {
+  
+  //    isAuth !== null ? setUserIsAuthenticated(true) : setUserIsAuthenticated(false)
 
-  }, [userIsAuthenticated]);
+  // }, [userIsAuthenticated]);
 
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/todos" element={<Todos/>} />
-          {/* <ProtectedRoute
-            path="/todos"
-            component={Todos}
-            isAuthorized={userIsAuthenticated}
-          /> */}
-        </Routes>
+           <Route element={<ProtectedRoute/>}> 
+                <Route path="/todos" element={<Todos/>} /> 
+           </Route>  
+        </Routes> 
       </Router>
      </div>
   );
